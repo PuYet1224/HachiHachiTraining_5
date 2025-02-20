@@ -1,0 +1,130 @@
+<!-- grid-wrapper.component.html -->
+<div class="grid-wrapper">
+  <kendo-grid
+    [data]="data"
+    [height]="600"
+    [scrollable]="'scrollable'"
+    class="grid scrollable grid-custom"
+  >
+    <!-- Cột 1 -->
+    <kendo-grid-column
+      field="fullName"
+      title="Họ và tên"
+      [width]="300"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-name">
+          <img
+            src="../../assets/images/anhMinh.png"
+            alt="Avatar"
+            loading="lazy"
+          />
+          <div class="name-ctn">
+            <div class="name">{{ dataItem.fullName }}</div>
+            <div class="cccd">{{ dataItem.cccd }}</div>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 2 -->
+    <kendo-grid-column
+      field="gender"
+      title="Giới tính"
+      [width]="200"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-gender">{{ dataItem.gender }}</div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 3 -->
+    <kendo-grid-column
+      field="birthYear"
+      title="Năm sinh"
+      [width]="200"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-birth">{{ dataItem.birthYear }}</div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 4 -->
+    <kendo-grid-column
+      field="email"
+      title="Email"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-email">{{ dataItem.email }}</div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 5 -->
+    <kendo-grid-column
+      field="phone"
+      title="Số điện thoại"
+      [width]="130"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-sdt">{{ dataItem.phone }}</div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 6 -->
+    <kendo-grid-column
+      field="account"
+      title="Tài khoản"
+      [width]="270"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-account">{{ dataItem.account }}</div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 7 -->
+    <kendo-grid-column
+      field="company"
+      title="Thuộc công ty"
+      [width]="200"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div class="col-company">{{ dataItem.company }}</div>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Cột 8 (dấu 3 chấm) -->
+    <kendo-grid-column title="" [width]="50">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <div class="action">
+          <!-- Gán #menuButton để tham chiếu đến nút -->
+          <button
+            #menuButton
+            kendobutton
+            icon="more-horizontal"
+            class="k-button k-button-icon togglePopup k-icon-button k-button-md k-rounded-md k-button-solid-base k-button-solid"
+            role="button"
+            (click)="toggleMenu(rowIndex, menuButton)"
+          >
+            <kendo-icon
+              class="k-i-more-horizontal k-button-icon k-icon"
+              aria-hidden="true"
+            ></kendo-icon>
+          </button>
+    
+          <!-- Kendo Popup -->
+          <kendo-popup
+        *ngIf="openedRowIndex === rowIndex"
+        [anchor]="popupAnchor"
+        [popupAlign]="{ vertical: 'bottom', horizontal: 'right' }"  
+        [animate]="true"
+        (close)="openedRowIndex = null"
+      >
+        <div class="popup-content">
+          <button (click)="openEditPage(dataItem)" class="menu-item">Chỉnh sửa</button>
+        </div>
+      </kendo-popup>
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>
